@@ -11,7 +11,7 @@
             "request": "launch",
             "args": [
                 "--extensionDevelopmentPath=${workspaceFolder}",
-                "${workspaceFolder}/../SysML-v2-Release/kerml/src/Simple Tests"
+                "${workspaceFolder}/SysML-v2-Release/kerml/src/examples/Simple Tests"
             ]
         },
         {
