@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "../SysML-v2-Release"
 		}
 	],
 	"settings": {}

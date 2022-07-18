@@ -11,27 +11,22 @@
     },
     {
       "name": "keyword.control.sysml",
-      "match": "\\b(element|package|relationship|to)\\b"
+      "match": "\\b(doc|element|from|language|package|relationship|to)\\b"
+    },
+    {
+      "name": "string.quoted.double.sysml",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "string.quoted.single.sysml",
+      "begin": "'",
+      "end": "'"
     }
   ],
   "repository": {
     "comments": {
       "patterns": [
-        {
-          "name": "comment.block.sysml",
-          "begin": "/\\*",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.comment.sysml"
-            }
-          },
-          "end": "\\*/",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.comment.sysml"
-            }
-          }
-        },
         {
           "begin": "//",
           "beginCaptures": {
