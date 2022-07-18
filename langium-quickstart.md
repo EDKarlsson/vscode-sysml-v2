@@ -6,10 +6,10 @@ This folder contains all necessary files for your language extension.
  * `package.json` - the manifest file in which you declare your language support.
  * `language-configuration.json` - the language configuration used in the VS Code editor, defining the tokens that are used for comments and brackets.
  * `src/extension.ts` - the main code of the extension, which is responsible for launching a language server and client.
- * `src/language-server/sys-ml-v-2.langium` -  the grammar definition of your language.
+ * `src/language-server/sysml.langium` -  the grammar definition of your language.
  * `src/language-server/main.ts` - the entry point of the language server process.
- * `src/language-server/sys-ml-v-2-module.ts` - the dependency injection module of your language implementation. Use this to register overridden and added services.
- * `src/language-server/sys-ml-v-2-validator.ts` - an example validator. You should change it to reflect the semantics of your language.
+ * `src/language-server/sysml-module.ts` - the dependency injection module of your language implementation. Use this to register overridden and added services.
+ * `src/language-server/sysml-validator.ts` - an example validator. You should change it to reflect the semantics of your language.
  * `src/cli/index.ts` - the entry point of the command line interface (CLI) of your language.
  * `src/cli/generator.ts` - the code generator used by the CLI to write output files from DSL documents.
  * `src/cli/cli-util.ts` - utility code for the CLI.

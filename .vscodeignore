@@ -7,4 +7,5 @@ langium-quickstart.md
 **/.eslintrc.json
 **/*.map
 **/*.ts
-SysML-v2-Release
+SysML-v2-Release/**
+SysML-v2-Release/.git

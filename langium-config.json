@@ -1,11 +1,11 @@
 {
-    "projectName": "vscode-sysml-v2",
+    "projectName": "Sys-M-L",
     "languages": [{
-        "id": "sysml-v2",
-        "grammar": "src/language-server/sysml-v2.langium",
+        "id": "sysml",
+        "grammar": "src/language-server/sysml.langium",
         "fileExtensions": [".sysml", ".kerml"],
         "textMate": {
-            "out": "syntaxes/sysml-v2.tmLanguage.json"
+            "out": "syntaxes/sysml.tmLanguage.json"
         }
     }],
     "out": "src/language-server/generated"

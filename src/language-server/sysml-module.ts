@@ -2,15 +2,15 @@ import {
     createDefaultModule, createDefaultSharedModule, DefaultSharedModuleContext, inject,
     LangiumServices, LangiumSharedServices, Module, PartialLangiumServices
 } from 'langium';
-import { SysMLv2GeneratedModule, SysMLv2GeneratedSharedModule } from './generated/module';
-import { SysMLv2ValidationRegistry, SysMLv2Validator } from './sysml-v2-validator';
+import { SysMLGeneratedModule, SysMLGeneratedSharedModule } from './generated/module';
+import { SysMLValidationRegistry, SysMLValidator } from './sysml-validator';
 
 /**
  * Declaration of custom services - add your own service classes here.
  */
-export type SysMLv2AddedServices = {
+export type SysMLAddedServices = {
     validation: {
-        SysMLv2Validator: SysMLv2Validator
+        SysMLValidator: SysMLValidator
     }
 }
 
@@ -18,17 +18,17 @@ export type SysMLv2AddedServices = {
  * Union of Langium default services and your custom services - use this as constructor parameter
  * of custom service classes.
  */
-export type SysMLv2Services = LangiumServices & SysMLv2AddedServices
+export type SysMLServices = LangiumServices & SysMLAddedServices
 
 /**
  * Dependency injection module that overrides Langium default services and contributes the
  * declared custom services. The Langium defaults can be partially specified to override only
  * selected services, while the custom services must be fully specified.
  */
-export const SysMLv2Module: Module<SysMLv2Services, PartialLangiumServices & SysMLv2AddedServices> = {
+export const SysMLModule: Module<SysMLServices, PartialLangiumServices & SysMLAddedServices> = {
     validation: {
-        ValidationRegistry: (services) => new SysMLv2ValidationRegistry(services),
-        SysMLv2Validator: () => new SysMLv2Validator()
+        ValidationRegistry: (services) => new SysMLValidationRegistry(services),
+        SysMLValidator: () => new SysMLValidator()
     }
 };
 
@@ -47,19 +47,19 @@ export const SysMLv2Module: Module<SysMLv2Services, PartialLangiumServices & Sys
  * @param context Optional module context with the LSP connection
  * @returns An object wrapping the shared services and the language-specific services
  */
-export function createSysMLv2Services(context?: DefaultSharedModuleContext): {
+export function createSysMLServices(context?: DefaultSharedModuleContext): {
     shared: LangiumSharedServices,
-    SysMLv2: SysMLv2Services
+    SysML: SysMLServices
 } {
     const shared = inject(
         createDefaultSharedModule(context),
-        SysMLv2GeneratedSharedModule
+        SysMLGeneratedSharedModule
     );
-    const SysMLv2 = inject(
+    const SysML = inject(
         createDefaultModule({ shared }),
-        SysMLv2GeneratedModule,
-        SysMLv2Module
+        SysMLGeneratedModule,
+        SysMLModule
     );
-    shared.ServiceRegistry.register(SysMLv2);
-    return { shared, SysMLv2 };
+    shared.ServiceRegistry.register(SysML);
+    return { shared, SysML };
 }

@@ -24,7 +24,7 @@ For example:
 
 This extension contributes the following settings:
 
-* `vscode-sysml-v2.enable`: enable/disable this extension
+* `sysml-v2.enable`: enable/disable this extension
 
 ## Known Issues
 

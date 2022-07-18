@@ -1,4 +1,4 @@
-grammar SysMLv2
+grammar SysML
 
 // entry Model:
 //     (persons+=Person | greetings+=Greeting)*;

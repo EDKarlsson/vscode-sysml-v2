@@ -1,6 +1,6 @@
 {
-  "name": "sysml-v2",
-  "scopeName": "source.sysml-v2",
+  "name": "sysml",
+  "scopeName": "source.sysml",
   "fileTypes": [
     ".sysml",
     ".kerml"
@@ -10,7 +10,7 @@
       "include": "#comments"
     },
     {
-      "name": "keyword.control.sysml-v2",
+      "name": "keyword.control.sysml",
       "match": "\\b(element|package|relationship|to)\\b"
     }
   ],
@@ -18,17 +18,17 @@
     "comments": {
       "patterns": [
         {
-          "name": "comment.block.sysml-v2",
+          "name": "comment.block.sysml",
           "begin": "/\\*",
           "beginCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.sysml-v2"
+              "name": "punctuation.definition.comment.sysml"
             }
           },
           "end": "\\*/",
           "endCaptures": {
             "0": {
-              "name": "punctuation.definition.comment.sysml-v2"
+              "name": "punctuation.definition.comment.sysml"
             }
           }
         },
@@ -36,11 +36,11 @@
           "begin": "//",
           "beginCaptures": {
             "1": {
-              "name": "punctuation.whitespace.comment.leading.sysml-v2"
+              "name": "punctuation.whitespace.comment.leading.sysml"
             }
           },
           "end": "(?=$)",
-          "name": "comment.line.sysml-v2"
+          "name": "comment.line.sysml"
         }
       ]
     }

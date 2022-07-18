@@ -1,6 +1,6 @@
 {
-    "name": "sysml-v2",
-    "displayName": "sysml-v2",
+    "name": "sysml",
+    "displayName": "sysml",
     "description": "Please enter a brief description here",
     "version": "0.0.1",
     "engines": {
@@ -12,20 +12,20 @@
     "contributes": {
         "languages": [
             {
-            "id": "sysml-v2",
-            "aliases": ["SysML v2", "SysML-v2", "sysml v2", "kerml", "KerML"],
+            "id": "sysml",
+            "aliases": ["SysML", "Sysml", "SysMLv2", "SysML-v2", "sysmlv2", "sysml2", "kerml", "KerML"],
             "extensions": [".sysml", ".kerml"],
             "configuration": "./language-configuration.json"
         }
     ],
         "grammars": [{
-            "language": "sysml-v2",
-            "scopeName": "source.sysml-v2",
-            "path": "./syntaxes/sysml-v2.tmLanguage.json"
+            "language": "sysml",
+            "scopeName": "source.sysml",
+            "path": "./syntaxes/sysml.tmLanguage.json"
         }]
     },
     "activationEvents": [
-        "onLanguage:sysml-v2"
+        "onLanguage:sysml"
     ],
     "files": [
         "bin",

@@ -1,15 +1,15 @@
 import { ValidationAcceptor, ValidationChecks, ValidationRegistry } from 'langium';
-import { SysMLv2AstType, Element } from './generated/ast';
-import type { SysMLv2Services } from './sysml-v2-module';
+import { SysMLAstType, Element } from './generated/ast';
+import type { SysMLServices } from './sysml-module';
 
 /**
  * Registry for validation checks.
  */
-export class SysMLv2ValidationRegistry extends ValidationRegistry {
-    constructor(services: SysMLv2Services) {
+export class SysMLValidationRegistry extends ValidationRegistry {
+    constructor(services: SysMLServices) {
         super(services);
-        const validator = services.validation.SysMLv2Validator;
-        const checks: ValidationChecks<SysMLv2AstType> = {
+        const validator = services.validation.SysMLValidator;
+        const checks: ValidationChecks<SysMLAstType> = {
             Element: validator.checkElementStartsWithCapital
             // Element: validator.checkPersonStartsWithCapital
         };
@@ -20,13 +20,13 @@ export class SysMLv2ValidationRegistry extends ValidationRegistry {
 /**
  * Implementation of custom validations.
  */
-export class SysMLv2Validator {
+export class SysMLValidator {
 
     checkElementStartsWithCapital(element: Element, accept: ValidationAcceptor): void {
         if (element.name) {
             const firstChar = element.name.substring(0, 1);
             if (firstChar.toUpperCase() !== firstChar) {
-                accept('warning', 'Person name should start with a capital.', { node: element, property: 'name' });
+                accept('warning', 'Element name should start with a capital.', { node: element, property: 'name' });
             }
         }
     }
