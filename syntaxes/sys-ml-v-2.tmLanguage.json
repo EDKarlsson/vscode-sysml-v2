@@ -1,0 +1,58 @@
+{
+  "name": "sys-ml-v-2",
+  "scopeName": "source.sys-ml-v-2",
+  "fileTypes": [
+    ".sysml",
+    ".kerml"
+  ],
+  "patterns": [
+    {
+      "include": "#comments"
+    },
+    {
+      "name": "keyword.control.sys-ml-v-2",
+      "match": "\\b(element|ownedRelationship|package)\\b"
+    },
+    {
+      "name": "string.quoted.double.sys-ml-v-2",
+      "begin": "\"",
+      "end": "\""
+    },
+    {
+      "name": "string.quoted.single.sys-ml-v-2",
+      "begin": "'",
+      "end": "'"
+    }
+  ],
+  "repository": {
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.block.sys-ml-v-2",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.sys-ml-v-2"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.sys-ml-v-2"
+            }
+          }
+        },
+        {
+          "begin": "//",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.sys-ml-v-2"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.sys-ml-v-2"
+        }
+      ]
+    }
+  }
+}

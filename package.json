@@ -1,0 +1,65 @@
+{
+    "name": "sysml-v2",
+    "displayName": "sysml-v2",
+    "description": "Please enter a brief description here",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.56.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+            "id": "sysml-v2",
+            "aliases": ["SysML v2", "SysML-v2", "sysml v2", "kerml", "KerML"],
+            "extensions": [".sysml", ".kerml"],
+            "configuration": "./language-configuration.json"
+        }
+    ],
+        "grammars": [{
+            "language": "sysml-v2",
+            "scopeName": "source.sysml-v2",
+            "path": "./syntaxes/sysml-v2.tmLanguage.json"
+        }]
+    },
+    "activationEvents": [
+        "onLanguage:sysml-v2"
+    ],
+    "files": [
+        "bin",
+        "out",
+        "src"
+    ],
+    "bin": {
+        "sysml-v2-cli": "./bin/cli"
+    },
+    "main": "./out/extension.js",
+    "scripts": {
+        "vscode:prepublish": "npm run build && npm run lint",
+        "build": "tsc -b tsconfig.json",
+        "watch": "tsc -b tsconfig.json --watch",
+        "lint": "eslint src --ext ts",
+        "langium:generate": "langium generate",
+        "langium:watch": "langium generate --watch"
+    },
+    "dependencies": {
+        "chevrotain": "^9.1.0",
+        "colors": "^1.4.0",
+        "commander": "^8.0.0",
+        "langium": "^0.4.0",
+        "vscode-languageclient": "^7.0.0",
+        "vscode-languageserver": "^7.0.0",
+        "vscode-uri": "^3.0.2"
+    },
+    "devDependencies": {
+        "@types/node": "^14.17.3",
+        "@types/vscode": "^1.56.0",
+        "@typescript-eslint/eslint-plugin": "^4.14.1",
+        "@typescript-eslint/parser": "^4.14.1",
+        "eslint": "^7.19.0",
+        "langium-cli": "^0.4.0",
+        "typescript": "^4.6.2"
+    }
+}

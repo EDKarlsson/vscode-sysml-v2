@@ -1,0 +1,12 @@
+{
+    "projectName": "SysMLv2",
+    "languages": [{
+        "id": "sysml-v2",
+        "grammar": "src/language-server/sysml-v2.langium",
+        "fileExtensions": [".sysml", ".kerml"],
+        "textMate": {
+            "out": "syntaxes/sysml-v2.tmLanguage.json"
+        }
+    }],
+    "out": "src/language-server/generated"
+}
