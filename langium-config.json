@@ -1,5 +1,5 @@
 {
-    "projectName": "SysMLv2",
+    "projectName": "vscode-sysml-v2",
     "languages": [{
         "id": "sysml-v2",
         "grammar": "src/language-server/sysml-v2.langium",
