@@ -22,6 +22,9 @@
       "name": "string.quoted.single.sysml",
       "begin": "'",
       "end": "'"
+    },
+    {
+      "include": "#sysml-comments"
     }
   ],
   "repository": {
@@ -51,7 +54,11 @@
           },
           "end": "(?=$)",
           "name": "comment.line.sysml"
-        } ,
+        }
+      ]
+    },
+    "sysml-comments": {
+      "patterns": [
         {
           "name": "string.unquoted.sysml",
           "begin": "/\\*",

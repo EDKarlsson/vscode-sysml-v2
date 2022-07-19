@@ -1,12 +1,14 @@
 {
     "projectName": "Sys-M-L",
-    "languages": [{
-        "id": "sysml",
-        "grammar": "src/language-server/sysml.langium",
-        "fileExtensions": [".sysml", ".kerml"],
-        "textMate": {
-            "out": "syntaxes/sysml.tmLanguage.json"
+    "languages": [
+        {
+            "id": "sysml",
+            "grammar": "src/language-server/sysml.langium",
+            "fileExtensions": [".sysml", ".kerml"],
+            "textMate": {
+                "out": "syntaxes/generated.tmLanguage.json"
+            }
         }
-    }],
+    ],
     "out": "src/language-server/generated"
 }

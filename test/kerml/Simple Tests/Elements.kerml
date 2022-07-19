@@ -3,6 +3,8 @@ package Elements {
     
     element A {
         doc /* Element A is related to element B. */
+        //* my doc string */
+
         relationship to B;
     }
     

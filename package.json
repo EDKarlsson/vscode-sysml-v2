@@ -560,7 +560,8 @@
         "watch": "tsc -b tsconfig.json --watch",
         "lint": "eslint src --ext ts",
         "langium:generate": "langium generate",
-        "langium:watch": "langium generate --watch"
+        "langium:watch": "langium generate --watch",
+        "merge": "ts-node scripts/merge.ts"
     },
     "dependencies": {
         "chevrotain": "^9.1.0",

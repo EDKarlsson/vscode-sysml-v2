@@ -1,0 +1,37 @@
+{
+    "$merge": {
+        "source": {
+            "$import": "syntaxes/generated.tmLanguage.json"
+        },
+        "with": {
+            "patterns": {
+                "$concat": [
+                    {
+                        "include": "#sysml-comments"
+                    }
+                ]
+            },
+            "repository": {
+                "sysml-comments": {
+                    "patterns": [
+                        {
+                            "name": "string.unquoted.sysml",
+                            "begin": "/\\*",
+                            "beginCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.begin.sysml"
+                                }
+                            },
+                            "end": "\\*/",
+                            "endCaptures": {
+                                "0": {
+                                    "name": "punctuation.definition.string.end.sysml"
+                                }
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}
