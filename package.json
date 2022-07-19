@@ -12,17 +12,535 @@
     "contributes": {
         "languages": [
             {
-            "id": "sysml",
-            "aliases": ["SysML", "Sysml", "SysMLv2", "SysML-v2", "sysmlv2", "sysml2", "kerml", "KerML"],
-            "extensions": [".sysml", ".kerml"],
-            "configuration": "./language-configuration.json"
-        }
-    ],
-        "grammars": [{
-            "language": "sysml",
-            "scopeName": "source.sysml",
-            "path": "./syntaxes/sysml.tmLanguage.json"
-        }]
+                "id": "sysml",
+                "aliases": [
+                    "SysML",
+                    "Sysml",
+                    "SysMLv2",
+                    "SysML-v2",
+                    "sysmlv2",
+                    "sysml2",
+                    "kerml",
+                    "KerML"
+                ],
+                "extensions": [
+                    ".sysml",
+                    ".kerml"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sysml",
+                "scopeName": "source.sysml",
+                "path": "./syntaxes/sysml.tmLanguage.json"
+            },
+            {
+                "path": "./syntaxes/sysml.extend.tmLanguage.json",
+                "scopeName": "sysml.extend.injection",
+                "injectTo": [
+                    "source.sysml"
+                ]
+            }
+        ],
+        "semanticTokenTypes": [
+            {
+                "id": "AnnotatingElement",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Annotation",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Association",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "AssociationStructure",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Behavior",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "BindingConnector",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "BooleanExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Class",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Classifier",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "CollectExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Comment",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Conjugation",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Connector",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "DataType",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Disjoining",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Documentation",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Element",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ElementFilterMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "EndFeatureMembersip",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Expression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Feature",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureChainExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureChaining",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureReferenceExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureTyping",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureValue",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Function",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Import",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Interaction",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Invariant",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "InvocationExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ItemFlow",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralBoolean",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralInfinity",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralInteger",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralRational",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralString",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Membership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Metaclass",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "MetadataFeature",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Multiplicity",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "MultiplicityRange",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Namespace",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "NullExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "OperatorExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Package",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ParameterMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Predicate",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Redefinition",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Relationship",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ResultExpressionMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ReturnParameterMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "SelectExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Specialization",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Step",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Structure",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Subclassification",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Subsetting",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Succession",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "SuccessionItemFlow",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "TextualRepresentation",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Type",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "TypeFeaturing",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "AnnotatingElement-Feature",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "AnnotatingElement",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Annotation",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Association-Structure",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Behavior-Association",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Behavior",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "BooleanExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Class",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Classifier-Relationship",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Classifier",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Connector",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Connector",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Element",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Expression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Feature-Relationship",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Feature",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "FeatureMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Function",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "InvocationExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ItemFlow-Succession",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ItemFlow",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "LiteralExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Membership-TypeFeaturing",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Membership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Multiplicity",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Namespace",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "OperatorExpression",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "ParameterMembership",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Relationship",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Specialization",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Step",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Connector",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Structure",
+                "superType": "type",
+                "description": ""
+            },
+            {
+                "id": "Type",
+                "superType": "type",
+                "description": ""
+            }
+        ]
     },
     "activationEvents": [
         "onLanguage:sysml"
@@ -59,6 +577,7 @@
         "@typescript-eslint/eslint-plugin": "^4.14.1",
         "@typescript-eslint/parser": "^4.14.1",
         "eslint": "^7.19.0",
+        "json-merger": "^1.1.9",
         "langium-cli": "^0.4.0",
         "typescript": "^4.6.2"
     }

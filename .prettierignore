@@ -1,0 +1,4 @@
+*.kerml
+*.sysml
+out
+**/generated

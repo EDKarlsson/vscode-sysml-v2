@@ -8,6 +8,6 @@ package Elements {
     
     element B {
         language "HTML"
-            /* <a href="https://plm.elsewhere.com/part?id="1234"/> */
+            /* <a href="https://plm.elsewhere.com/part?id=1234"/> */
     }
 }

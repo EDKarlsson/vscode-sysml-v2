@@ -34,7 +34,7 @@ fragment OwnedElement infers Element:
     ;
 fragment OtherOwnedElement infers Element:
     'language' language=STRING
-    | 'doc' DOC_COMMENT
+    | 'doc' comment=REGULAR_COMMENT
     ;
 
 // Relationship:
@@ -43,11 +43,10 @@ fragment OtherOwnedElement infers Element:
 //     RelationshipBody
 //     ;
 
-interface Relationship {
+interface Relationship extends Element {
     target?:@Element
     source?:@Element
     ownedRelationship?:Relationship[]
-    ownedRelatedElement?:OwnedRelatedElement[]
 }
 
 OwnedRelationship returns Relationship:
@@ -80,27 +79,27 @@ fragment RelationshipBody:
     ';' | '{' RelationshipOwnedElement '}'
     ;
 
-RelationshipOwnedElement returns Relationship:
-    ownedRelatedElement += OwnedRelatedElement*
-    // | ownedRelatedElement += OwnedRelatedRelationship
+fragment RelationshipOwnedElement:
+    ownedRelatedElement += (OwnedRelatedElement|OwnedRelatedRelationship)*
     ;
 
 OwnedRelatedElement:
     'element' Identification ElementBody
     ;
 
-OwnedRelatedRelationship:
+OwnedRelatedRelationship returns Relationship:
     'relationship' Identification
     RelationshipRelatedElements
     RelationshipBody
     ;
 
-
+terminal REGULAR_COMMENT returns string: 
+    /\/\*[\s\S]*\*\//
+    ;
 terminal ID: /[_a-zA-Z][\w_\d]*/;
 // terminal INT returns number: /[0-9]+/;
 terminal STRING: /"[^"]*"|'[^']*'/;
-terminal DOC_COMMENT: /\/\*[\s\S]*?\*\//;
 
 hidden terminal WS: /[\s+\n]/;
-// hidden terminal ML_COMMENT: /\/\*[\s\S]*?\*\//;
-hidden terminal SL_COMMENT: /\/\/[^\n\r]*/;
+hidden terminal MULTILINE_NOTE: /\/\/\*[\s\S]*?\*\//;
+hidden terminal SINGLE_LINE_NOTE: /\/\/[^\n\r]*/;

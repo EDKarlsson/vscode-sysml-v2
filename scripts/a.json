@@ -1,0 +1,17 @@
+{
+  "$merge": {
+    "source": {
+      "$import": "b.json"
+    },
+    "with": {
+      "prop1": {
+        "$replace": {
+          "prop1a": "this will replace b.json's property prop1"
+        }
+      },
+      "prop2": {
+        "prop2a": "this will merge with b.json's property prop2"
+      }
+    }
+  }
+}

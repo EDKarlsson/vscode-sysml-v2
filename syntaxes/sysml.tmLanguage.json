@@ -28,6 +28,21 @@
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.sysml",
+          "begin": "//\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.sysml"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.sysml"
+            }
+          }
+        },
+        {
           "begin": "//",
           "beginCaptures": {
             "1": {
@@ -36,6 +51,21 @@
           },
           "end": "(?=$)",
           "name": "comment.line.sysml"
+        } ,
+        {
+          "name": "string.unquoted.sysml",
+          "begin": "/\\*",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.sysml"
+            }
+          },
+          "end": "\\*/",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.sysml"
+            }
+          }
         }
       ]
     }

@@ -1,0 +1,8 @@
+{
+  "prop1": {
+    "prop1b": "will be replaced"
+  },
+  "prop2": {
+    "prop2b": "will be merged"
+  }
+}
