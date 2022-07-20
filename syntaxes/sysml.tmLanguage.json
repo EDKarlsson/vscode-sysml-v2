@@ -11,7 +11,7 @@
     },
     {
       "name": "keyword.control.sysml",
-      "match": "\\b(doc|element|from|language|package|relationship|to)\\b"
+      "match": "\\b(about|coment|comment|doc|element|from|package|relationship|to)\\b"
     },
     {
       "name": "string.quoted.double.sysml",
@@ -31,6 +31,16 @@
     "comments": {
       "patterns": [
         {
+          "begin": "//",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.sysml"
+            }
+          },
+          "end": "(?=$)",
+          "name": "comment.line.sysml"
+        },
+        {
           "name": "comment.block.sysml",
           "begin": "//\\*",
           "beginCaptures": {
@@ -44,16 +54,6 @@
               "name": "punctuation.definition.comment.sysml"
             }
           }
-        },
-        {
-          "begin": "//",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.whitespace.comment.leading.sysml"
-            }
-          },
-          "end": "(?=$)",
-          "name": "comment.line.sysml"
         }
       ]
     },
