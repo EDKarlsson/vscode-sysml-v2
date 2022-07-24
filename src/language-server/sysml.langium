@@ -22,35 +22,35 @@ interface SysMLAssociation extends SysMLClassifier { }
 interface SysMLClass extends SysMLClassifier { }
 interface SysMLDataType extends SysMLClassifier { }
 interface SysMLInteraction extends SysMLAssociation { }
-interface SysMLStructure extends SysML { }
-interface SysMLBehavior extends SysML { }
-interface SysMLAssociationStructure extends SysML { }
-interface SysMLMetaclass extends SysML { }
-interface SysMLFunction extends SysML { }
-interface SysMLPredicate extends SysML { }
-interface SysMLMultiplicityRange extends SysML { }
-interface SysMLExpression extends SysML { }
-interface SysMLItemFlow extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
+// interface SysMLStructure extends SysML { }
+// interface SysMLBehavior extends SysML { }
+// interface SysMLAssociationStructure extends SysML { }
+// interface SysMLMetaclass extends SysML { }
+// interface SysMLFunction extends SysML { }
+// interface SysMLPredicate extends SysML { }
+// interface SysMLMultiplicityRange extends SysML { }
+// interface SysMLExpression extends SysML { }
+// interface SysMLItemFlow extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
 
 // KerML Relationship Hierarchy
 interface SysMLRelationship extends SysMLElement { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
-interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
+// interface SysML extends SysML { }
 
 entry RootNamespace: 
     package+=Package
@@ -244,62 +244,63 @@ NamespaceBody infers Namespace:
 
 fragment NamespaceBodyElement:
     OwnedRelationshipNamespaceMember
-    | OwnedRelationshipAliasMember
-    | OwnedRelationshipImport
+    // | OwnedRelationshipAliasMember
+    // | OwnedRelationshipImport
     ;
 
 fragment OwnedRelationshipNamespaceMember:
     ownedRelationship += NamespaceMember
     ;
-fragment OwnedRelationshipAliasMember:
-    ownedRelationship += AliasMember
-    ;
-fragment OwnedRelationshipImport:
-    ownedRelationship += Import
-    ;
+// fragment OwnedRelationshipAliasMember:
+//     ownedRelationship += AliasMember
+//     ;
+// fragment OwnedRelationshipImport:
+//     ownedRelationship += Import
+//     ;
 fragment MemberPrefix:
     (visibility = VisibilityIndicator)?
     ;
 NamespaceMember:
-    NonFeatureMember
-    | NamespaceFeatureMember
+    // NonFeatureMember
+    // | NamespaceFeatureMember
+    NamespaceFeatureMember
     ;
-NonFeatureMember infers OwningMembership :
-    MemberPrefix
-    ownedMemberElement = NonFeatureElement
-;
+// NonFeatureMember infers OwningMembership :
+//     MemberPrefix
+//     ownedMemberElement = NonFeatureElement
+// ;
 NamespaceFeatureMember infers Membership :
     MemberPrefix
-    // ownedMemberElement = FeatureElement
+    ownedMemberElement = FeatureElement
 ;
-AliasMember infers Membership :
-    MemberPrefix
-    'alias' ( '<' memberShortName = ID'>' )?
-    ( memberName = ID)?
-    'for' memberElement = [QualifiedName] ';'
-    ;
-Import: 
-    ( visibility = VisibilityIndicator )?
-    'import' ( isImportAll ?= 'all' )?
-    ( ImportedNamespace
-    | ImportedFilterPackage ) ';'
-    ;
-ImportedNamespace infers Import :
-    ( importedNamespace = [QualifiedName] '::' )?
-    ( importedName = ID| '*' )
-    ( '::' isRecursive ?= '**' )?
-    ;
-ImportedFilterPackage infers Import:
-    importedNamespace = FilterPackage
-    // { ownedRelatedElement += importedNamespace }
-    ;
-FilterPackage infers Package :
-    ownedRelationship += FilterPackageImport
-    // ( ownedRelationship += FilterPackageMember )+
-;
-FilterPackageImport infers Import :
-    ImportedNamespace
-;
+// AliasMember infers Membership :
+//     MemberPrefix
+//     'alias' ( '<' memberShortName = ID'>' )?
+//     ( memberName = ID)?
+//     'for' memberElement = [QualifiedName] ';'
+//     ;
+// Import: 
+//     ( visibility = VisibilityIndicator )?
+//     'import' ( isImportAll ?= 'all' )?
+//     ( ImportedNamespace
+//     | ImportedFilterPackage ) ';'
+//     ;
+// ImportedNamespace infers Import :
+//     ( importedNamespace = [QualifiedName] '::' )?
+//     ( importedName = ID| '*' )
+//     ( '::' isRecursive ?= '**' )?
+//     ;
+// ImportedFilterPackage infers Import:
+//     importedNamespace = FilterPackage
+//     // { ownedRelatedElement += importedNamespace }
+//     ;
+// FilterPackage infers Package :
+//     ownedRelationship += FilterPackageImport
+//     // ( ownedRelationship += FilterPackageMember )+
+// ;
+// FilterPackageImport infers Import :
+//     ImportedNamespace
+// ;
 // FilterPackageMember infers ElementFilterMembership :
 //     '[' condition = OwnedExpression ']'
 //     // { visibility = 'private' }
@@ -347,8 +348,8 @@ terminal VisibilityIndicator:
     // | Redefinition
     // | TypeFeaturing
     ;
-// FeatureElement infers Feature :
-//     Feature
+FeatureElement infers Feature :
+    Feature
 //     | Step
 //     | Expression
 //     | BooleanExpression
@@ -358,7 +359,7 @@ terminal VisibilityIndicator:
 //     | Succession
 //     | ItemFlow
 //     | SuccessionItemFlow
-//     ;
+    ;
 /************************************************
  * Name Resolution
  ************************************************/
@@ -368,29 +369,37 @@ QualifiedName:
 /************************************************
  * Types
  ************************************************/
-// Type =
-// ( isAbstract ?= 'abstract' )? 'type'
-// TypeDeclaration TypeBody
-// TypeDeclaration : Type =
-// (t.isSufficient ?= 'all' )? Identification
-// ( t.ownedRelationship += OwnedMultiplicity )?
-// ( SpecializationPart | ConjugationPart )+
-// DisjoiningPart?
-// SpecializationPart : Type =
-// SPECIALIZES ownedRelationship += OwnedSpecialization
-// ( ',' ownedRelationship += OwnedSpecialization )*
-// ConjugationPart : Type =
-// CONJUGATES ownedRelationship += OwnedConjugation
-// DisjoiningPart : Type =
-// 'disjoint' 'from' ownedRelationship += OwnedDisjoining
-// ( ',' ownedRelationship += OwnedDisjoining )*
-// TypeBody : Type =
-// ';' | '{' TypeBodyElement* '}'
-// TypeBodyElement : Type =
-// ownedRelationship += NonFeatureMember
-// | ownedRelationship += FeatureMember
-// | ownedRelationship += AliasMember
-// | ownedRelationship += Import
+Type :
+    ( isAbstract ?= 'abstract' )? 'type'
+    TypeDeclaration TypeBody
+    ;
+
+fragment TypeDeclaration infers Type:
+    (isSufficient ?= 'all' )? Identification
+    ( ownedRelationship += OwnedMultiplicity )?
+    ( SpecializationPart | ConjugationPart )+
+    DisjoiningPart?
+    ;
+SpecializationPart infers Type :
+    SPECIALIZES ownedRelationship += OwnedSpecialization
+    ( ',' ownedRelationship += OwnedSpecialization )*
+    ;
+ConjugationPart infers Type :
+    CONJUGATES ownedRelationship += OwnedConjugation
+    ;
+DisjoiningPart infers Type :
+'disjoint' 'from' ownedRelationship += OwnedDisjoining
+( ',' ownedRelationship += OwnedDisjoining )*
+;
+TypeBody infers Type :
+';' | '{' TypeBodyElement* '}'
+;
+TypeBodyElement infers Type :
+    ownedRelationship += NonFeatureMember
+    | ownedRelationship += FeatureMember
+    | ownedRelationship += AliasMember
+    | ownedRelationship += Import
+    ;
 /************************************************
  * 
  ************************************************/
