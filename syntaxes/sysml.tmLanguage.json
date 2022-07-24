@@ -11,7 +11,7 @@
     },
     {
       "name": "keyword.control.sysml",
-      "match": "\\b(about|coment|comment|doc|element|from|package|relationship|to)\\b"
+      "match": "\\b(about|coment|comment|doc|element|from|language|package|relationship|rep|to)\\b"
     },
     {
       "name": "string.quoted.double.sysml",

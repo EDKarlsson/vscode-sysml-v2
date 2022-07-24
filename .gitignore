@@ -3,3 +3,4 @@ out
 /**/generated
 .vscode-test/
 syntaxes/generated*
+*.code-workspace
