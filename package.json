@@ -19,12 +19,19 @@
                     "SysMLv2",
                     "SysML-v2",
                     "sysmlv2",
-                    "sysml2",
-                    "kerml",
+                    "sysml2"
+                ],
+                "extensions": [
+                    ".sysml"
+                ],
+                "configuration": "./language-configuration.json"
+            },
+            {
+                "id": "kerml",
+                "aliases": [
                     "KerML"
                 ],
                 "extensions": [
-                    ".sysml",
                     ".kerml"
                 ],
                 "configuration": "./language-configuration.json"
@@ -37,11 +44,9 @@
                 "path": "./syntaxes/sysml.tmLanguage.json"
             },
             {
-                "path": "./syntaxes/sysml.extend.tmLanguage.json",
-                "scopeName": "sysml.extend.injection",
-                "injectTo": [
-                    "source.sysml"
-                ]
+                "language": "kerml",
+                "scopeName": "source.sysml",
+                "path": "./syntaxes/sysml.tmLanguage.json"
             }
         ],
         "semanticTokenTypes": [
