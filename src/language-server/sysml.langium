@@ -1,56 +1,7 @@
 grammar SysML
 // KerML Element Hierarchy
-interface SysMLElement {
-    elementId?:string
-    aliasIds?:string[]
-    shortName?:string[]
-}
-interface SysMLNamespace extends SysMLElement { }
-interface SysMLAnnotingElement extends SysMLElement { }
-interface SysMLType extends SysMLNamespace { }
-interface SysMLPackage extends SysMLNamespace { }
-interface SysMLComment extends SysMLAnnotingElement { }
-interface SysMLTextualRepresentation extends SysMLAnnotingElement { }
-interface SysMLDocumentation extends SysMLComment { }
-interface SysMLFeature extends SysMLType { }
-interface SysMLMetadataFeature extends SysMLFeature{ }
-interface SysMLClassifier extends SysMLType { }
-interface SysMLMultiplicity extends SysMLFeature { }
-interface SysMLStep extends SysMLFeature { }
-interface SysMLConnector extends SysMLFeature { }
-interface SysMLAssociation extends SysMLClassifier { }
-interface SysMLClass extends SysMLClassifier { }
-interface SysMLDataType extends SysMLClassifier { }
-interface SysMLInteraction extends SysMLAssociation { }
-// interface SysMLStructure extends SysML { }
-// interface SysMLBehavior extends SysML { }
-// interface SysMLAssociationStructure extends SysML { }
-// interface SysMLMetaclass extends SysML { }
-// interface SysMLFunction extends SysML { }
-// interface SysMLPredicate extends SysML { }
-// interface SysMLMultiplicityRange extends SysML { }
-// interface SysMLExpression extends SysML { }
-// interface SysMLItemFlow extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
+import "sysml.types";
 
-// KerML Relationship Hierarchy
-interface SysMLRelationship extends SysMLElement { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
-// interface SysML extends SysML { }
 
 entry RootNamespace: 
     package+=Package
@@ -296,7 +247,7 @@ ImportedFilterPackage infers Import:
     ;
 FilterPackage infers Package :
     ownedRelationship += FilterPackageImport
-    // ( ownedRelationship += FilterPackageMember )+
+    ( ownedRelationship += FilterPackageMember )+
 ;
 FilterPackageImport infers Import :
     ImportedNamespace
@@ -783,7 +734,8 @@ BooleanExpressionParameterDeclaration infers BooleanExpression :
     ParameterSpecializationPart
     ;
 ParameterSpecializationPart infers Feature:
-    ParameterSpecialization* MultiplicityPart? ParameterSpecialization(f)*
+    ParameterSpecialization* MultiplicityPart? ParameterSpecialization*
+    // ParameterSpecialization* MultiplicityPart? ParameterSpecialization(f)*
     ;
 ParameterSpecialization infers Feature:
     TypedBy | Subsets | Redefines
@@ -845,11 +797,11 @@ ResultExpressionMember infers ResultExpressionMembership :
  ************************************************/
  Expression:
     FeaturePrefix 'expr'
-    ExpressionDeclarationFunctionBody
+    ExpressionDeclaration
     // ExpressionDeclarationFunctionBody
     ;
-// ExpressionDeclaration infers Expression:
-ExpressionDeclarationFunctionBody infers Expression:
+ExpressionDeclaration infers Expression:
+// ExpressionDeclarationFunctionBody infers Expression:
     FeatureDeclaration
     ( ValuePart | StepParameterList ReturnParameterPart? )?
     ;
@@ -869,7 +821,7 @@ PredicateDeclaration infers Predicate:
  ************************************************/
  BooleanExpression:
     FeaturePrefix 'bool'
-    ExpressionDeclarationFunctionBody
+    ExpressionDeclaration
     ;
 Invariant :
     FeaturePrefix 'inv' ( 'true' | isNegated ?= 'false' )?
@@ -878,7 +830,7 @@ Invariant :
 /************************************************
  * Operator Expressions
  ************************************************/
- OwnedExpressionReferenceMember infers FeatureMembership :
+OwnedExpressionReferenceMember infers FeatureMembership :
     ownedRelationship += OwnedExpressionReference
     ;
 OwnedExpressionReference infers FeatureReferenceExpression :
@@ -1006,7 +958,8 @@ FunctionOperationExpression infers InvocationExpression:
     ownedRelationship += PrimaryExpressionMember '->'
     ownedRelationship += ReferenceTyping
     ( ownedRelationship += BodyExpressionMember
-    | ownedRelationship += FunctionReferenceExpressionMember
+    | ownedRelationship += FunctionExpressionMember
+    // | ownedRelationship += FunctionReferenceExpressionMember
     | ArgumentList )
     ;
 BodyExpressionMember infers FeatureMembership :
@@ -1117,17 +1070,17 @@ LiteralBoolean infers LiteralBoolean:
 terminal BooleanValue:
     'true' | 'false'
     ;
-LiteralString infers LiteralString:
+fragment LiteralString infers LiteralString:
     value = STRING_VALUE
     ;
-LiteralInteger infers LiteralInteger :
+fragment LiteralInteger infers LiteralInteger :
     value = DECIMAL_VALUE
     ;
-LiteralReal infers LiteralReal:
+fragment LiteralReal infers LiteralReal:
     value = RealValue
     ;
 // RealValue infers Real:
-RealValue:
+RealValue returns number:
     DECIMAL_VALUE? '.' ( DECIMAL_VALUE | EXPONENTIAL_VALUE )
     | EXPONENTIAL_VALUE
     ;
@@ -1179,7 +1132,7 @@ EmptyItemFeatureMember infers FeatureMembership:
     ownedMemberFeature = EmptyItemFeature
     ;
 EmptyItemFeature infers Feature:
-    {}
+    {SysMLFeature}
     ;
 ItemFlowEndMember infers FeatureMembership:
     ownedMemberFeature = ItemFlowEnd
@@ -1248,7 +1201,8 @@ OwnedMetadataFeatureAnnotation infers Annotation:
 OwnedMetadataFeature infers MetadataFeature:
     ( '@' | 'metadata' )
     ( Identification ( ':' | 'typed' 'by' ) )?
-    ownedRelationship += MetadataTyping
+    ownedRelationship += [Metaclass:ID]
+    // ownedRelationship += MetadataTyping
     TypeBody
     ;
 MetadataFeature:
@@ -1307,10 +1261,14 @@ ElementFilterMember infers ElementFilterMembership:
 /************************************************
  * Terminals
  ************************************************/
+
+// Numeric Literals
+terminal DECIMAL_VALUE: /[0-9]+/;
+terminal EXPONENTIAL_VALUE: DECIMAL_VALUE ('e' | 'E') ('+' | '-')? DECIMAL_VALUE;
+
 // terminal LINE_TERMINATOR: /[\n\r]/;
 // terminal LINE_TEXT: /[\s\S]/;
 terminal ID: /[_a-zA-Z][\w_\d]*/;
-
 terminal ESCAPE_SEQ:
     /[\'\"\b\f\t\n\\]/
     ;
@@ -1319,10 +1277,10 @@ terminal STRING: /"[^"]*"|'[^']*'/;
 terminal STRING_VALUE: /\"[^\\\"]\"/;
 terminal TYPED_BY: /\b(\:|typed\s+by)\b/;
 terminal SPECIALIZES: /\b(\:\>|specializes)\b/;
-terminal CONJUGATES: /\bconjugates\b/;
-terminal REDEFINES: /\bredefines\b/;
-// terminal SUBSETS: /\b(\:\>|(subsets))\b/;
-terminal SUBSETS: /\bsubsets\b/;
+terminal SUBSETS: /\b(\:\>|(subsets))\b/;
+terminal REDEFINES: /\b(\:\>\>|redefines)\b/;
+terminal CONJUGATES: /\b(\~|conjugates)\b/;
+// terminal SUBSETS: /\bsubsets\b/;
 
 // Notes and Comments
 // Hidden Terminals: Not parsed
