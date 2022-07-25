@@ -245,9 +245,9 @@ interface SysMLSelectExpression extends SysMLOperatorExpression {
 interface SysMLRelationship extends SysMLElement { 
     ownedRelatedElement?:SysMLElement[] | SysMLMetadataFeature[] | SysMLTextualRepresentation[] | SysMLFeature[];    // {subsets relatedElement, ordered}
     owningRelatedElement?:SysMLElement;     // {subsets relatedElement}
-    relatedElement?:@SysMLElement[];          // {ordered, nonunique, union}
-    source?:@SysMLElement;                   // {subsets relatedElement, ordered}
-    target?:@SysMLElement;                   // {subsets relatedElement, ordered}
+    relatedElement?:@SysMLElement[];        // {ordered, nonunique, union}
+    source?:@SysMLElement;                  // {subsets relatedElement, ordered}
+    target?:@SysMLElement;                  // {subsets relatedElement, ordered}
 }
 interface SysMLImport extends SysMLRelationship { 
     importedMemberName?:string;
@@ -268,14 +268,14 @@ interface SysMLMembership extends SysMLRelationship {
     membershipVisibility?:string;
 }
 interface SysMLOwningMembership extends SysMLMembership {
-    ownedMemberElement?:SysMLElement;    // {subsets ownedRelatedElement, redefines memberElement}
-    ownedMemberElementId?:string;        // {redefines memberElementId}
+    ownedMemberElement?:SysMLElement;   // {subsets ownedRelatedElement, redefines memberElement}
+    ownedMemberElementId?:string;       // {redefines memberElementId}
     ownedMemberName?:string;            // {redefines memberName}
     ownedMemberShortName?:string;       // {redefines memberShortName}
 }
 interface SysMLConjugation extends SysMLRelationship { 
-    conjugatedType?:@SysMLType | @SysMLFeature | SysMLFeature;   // { redefines source }
-    originalType?:@SysMLType | @SysMLFeature | SysMLFeature;     // { redefines target }
+    conjugatedType?:@SysMLType | @SysMLFeature | SysMLFeature;  // { redefines source }
+    originalType?:@SysMLType | @SysMLFeature | SysMLFeature;    // { redefines target }
     owningType?:@SysMLType | @SysMLFeature | SysMLFeature;      // { subsets conjugatedType, owningRelatedElement }
 }
 interface SysMLDisjoining extends SysMLRelationship { 
@@ -1182,7 +1182,7 @@ OwnedExpressionReferenceMember returns SysMLFeatureMembership: OwnedExpressionRe
 fragment OwnedExpressionReferenceMemberFrag returns SysMLFeatureMembership:
     ownedRelationship += OwnedExpressionReference
     ;
-OwnedExpressionReference returns SysMLFeatureReferenceExpression :
+OwnedExpressionReference returns SysMLFeatureReferenceExpression:
     OwnedExpressionReferenceFrag
     ;
 fragment OwnedExpressionReferenceFrag returns SysMLFeatureReferenceExpression :
