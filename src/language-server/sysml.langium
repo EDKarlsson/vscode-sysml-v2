@@ -406,23 +406,23 @@ RelationshipRelatedElements returns SysMLRelationship:
     ( 'from' RelationshipSourceList )?
     ( 'to' RelationshipTargetList )?
     ;
-fragment RelationshipSourceList:
+fragment RelationshipSourceList returns SysMLRelationship:
     RelationshipSource (',' RelationshipSource )*
     ;
 
-fragment RelationshipSource:
+fragment RelationshipSource returns SysMLRelationship:
     source += [SysMLElement:ID]
     ;
 
-fragment RelationshipTargetList:
+fragment RelationshipTargetList returns SysMLRelationship:
     RelationshipTarget (',' RelationshipTarget )*
     ;
 
-fragment RelationshipTarget:
+fragment RelationshipTarget returns SysMLRelationship:
     target += [SysMLElement:ID]
     ;
 
-fragment RelationshipBody:
+fragment RelationshipBody returns SysMLRelationship:
     ';' | '{' RelationshipOwnedElement '}'
     ;
 
@@ -431,7 +431,7 @@ fragment RelationshipOwnedElement returns SysMLRelationship:
     | OwnedCommentTextualMetadataAnnotation
     ;
 
-OwnedRelatedElementRelationship:
+fragment OwnedRelatedElementRelationship returns SysMLRelationship:
     ownedRelatedElement += OwnedRelatedElement
     |ownedRelatedElement += OwnedRelatedRelationship
     ;
@@ -552,11 +552,11 @@ NamespaceMember returns SysMLOwningMembership:
 fragment NonFeatureMember returns SysMLOwningMembership :
     MemberPrefix
     ownedMemberElement = NonFeatureElement
-;
+    ;
 fragment NamespaceFeatureMember returns SysMLMembership :
     MemberPrefix
     ownedMemberElement = FeatureElement
-;
+    ;
 AliasMember returns SysMLMembership :
     MemberPrefix
     'alias' ( '<' memberShortName = ID'>' )?
@@ -585,21 +585,18 @@ FilterPackage returns SysMLPackage :
 fragment FilterPackageFrag returns SysMLPackage :
     ownedRelationship += FilterPackageImport
     ( ownedRelationship += FilterPackageMember )+
-;
+    ;
 FilterPackageImport returns SysMLImport :
     ImportedNamespace
-;
+    ;
 FilterPackageMember returns SysMLElementFilterMembership :
     '[' condition = OwnedExpression ']'
     // { visibility = 'private' }
     ;
-
 // VisibilityIndicator infers VisibilityKind :
 terminal VisibilityIndicator:
     'public' | 'private' | 'protected'
     ;
-
-
 /************************************************
  * Namespace Elements
  ************************************************/
@@ -796,7 +793,7 @@ OwnedSubclassification returns SysMLSubclassification :
 /************************************************
  * Features
  ************************************************/
- Feature :
+ Feature returns SysMLFeature:
     FeaturePrefix
     'feature'? FeatureDeclaration
     ValuePart? TypeBody
@@ -818,7 +815,7 @@ fragment FeatureDeclaration returns SysMLFeature:
     ( FeatureSpecializationPart | ConjugationPart )?
     FeatureRelationshipPart*
     ;
-FeatureRelationshipPart returns SysMLFeature :
+fragment FeatureRelationshipPart returns SysMLFeature :
     ChainingPart
     | DisjoiningPart
     | InvertingPart
@@ -869,7 +866,7 @@ fragment Redefines returns SysMLFeature:
 /************************************************
  * Feature Typing
  ************************************************/
- FeatureTyping returns SysMLFeatureTyping:
+FeatureTyping returns SysMLFeatureTyping:
     ( 'specialization' Identification )?
     'typing' typedFeature = [SysMLFeature:ID]
     TYPED_BY GeneralType ';'
@@ -880,7 +877,7 @@ OwnedFeatureTyping returns SysMLFeatureTyping :
 /************************************************
  * Subsetting
  ************************************************/
- Subsetting returns SysMLSubsetting:
+Subsetting returns SysMLSubsetting:
     ( 'specialization' Identification )?
     'subset' SpecificType
     SUBSETS GeneralType ';'
@@ -891,7 +888,7 @@ OwnedSubsetting returns SysMLSubsetting:
 /************************************************
  * Redefinition
  ************************************************/
- Redefinition returns SysMLRedefinition:
+Redefinition returns SysMLRedefinition:
     ( 'specialization' Identification )?
     'redefinition' SpecificType
     REDEFINES GeneralType ';'
@@ -1139,7 +1136,7 @@ ReturnFeatureMember returns SysMLReturnParameterMembership:
     MemberPrefix 'return'
     ownedMemberParameter = FeatureElement
     ;
-ResultExpressionMember returns SysMLResultExpressionMembership :
+ResultExpressionMember returns SysMLResultExpressionMembership:
     MemberPrefix
     ownedResultExpression = OwnedExpression
     ;
@@ -1204,6 +1201,7 @@ OwnedExpression returns SysMLExpression :
     ;
 fragment ConditionalExpression returns SysMLOperatorExpression :
      'if' ownedRelationship += OwnedExpressionMember
+    //  'if' ownedRelationship += ConditionalBinaryOperatorExpression
     operator = '?'
     ownedRelationship += OwnedExpressionReferenceMember 'else'
     ownedRelationship += OwnedExpressionReferenceMember
@@ -1489,12 +1487,12 @@ fragment ItemFlowDeclaration returns SysMLItemFlow:
     ownedRelationship += ItemFlowEndMember
     ;
 ItemFeatureMember returns SysMLFeatureMembership:
-    ownedMemberFeature = ItemFeatureFrag
+    ownedMemberFeature = ItemFeature
     ;
-ItemFeatureFrag returns SysMLFeature:
-    ItemFeature;
+ItemFeature  returns SysMLFeature:
+    ItemFeatureFrag;
 
-fragment ItemFeature returns SysMLFeature:
+fragment ItemFeatureFrag returns SysMLFeature:
     ( name = ID ':' )?
     ( ownedTyping += OwnedFeatureTyping
     ( ownedRelationship += OwnedMultiplicity )?
@@ -1586,14 +1584,12 @@ fragment MultiplicityExpressionMemberFrag returns SysMLOwningMembership:
     ClassifierDeclaration TypeBody
     ;
 OwnedMetadataFeatureAnnotation returns SysMLAnnotation:
-    ownedRelatedElement += OwnedMetadataFeatureFragment
+    ownedRelatedElement += OwnedMetadataFeature
     ;
-
-OwnedMetadataFeatureFragment returns SysMLMetadataFeature:
-    OwnedMetadataFeature
+OwnedMetadataFeature returns SysMLMetadataFeature:
+    OwnedMetadataFeatureFrag
     ;
-
-fragment OwnedMetadataFeature returns SysMLMetadataFeature:
+fragment OwnedMetadataFeatureFrag returns SysMLMetadataFeature:
     ( '@' | 'metadata' )
     ( Identification ( ':' | 'typed' 'by' ) )?
     ownedRelationship += [SysMLMetaclass:ID]
