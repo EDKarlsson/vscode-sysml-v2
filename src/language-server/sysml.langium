@@ -1103,10 +1103,10 @@ fragment StepParameterList returns SysMLType:
     '(' ( ownedRelationship += StepParameterMember
     ( ',' ownedRelationship += StepParameterMember )* )? ')'
     ;
-StepParameterMember infers ParameterMembership :
+StepParameterMember returns SysMLParameterMembership :
     ownedMemberParameter = StepParameter
     ;
-StepParameter infers Feature:
+StepParameter returns SysMLFeature:
     ParameterDeclaration ValuePart?
     ;
 /************************************************
@@ -1122,7 +1122,9 @@ fragment FunctionDeclaration returns SysMLFunction:
 fragment ReturnParameterPart returns SysMLType :
     ownedRelationship += ReturnParameterMember
     ;
-ReturnParameterMember infers ReturnParameterMembership:
+ReturnParameterMember returns SysMLReturnParameterMembership:ReturnParameterMemberFrag;
+
+fragment ReturnParameterMemberFrag returns SysMLReturnParameterMembership:
     'return'? ownedMemberParameter = ParameterDeclaration
     ;
 fragment FunctionBody returns SysMLType :
